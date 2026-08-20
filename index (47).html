@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maddis · Tienda en línea · Tu estilo, a tu medida</title>
+<meta name="description" content="Maddis, tienda en línea de ropa y accesorios en Guatemala. Prendas bajo pedido. Tu estilo, a tu medida.">
+<link rel="icon" href="maddis-icono-blanco.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PALETA MADDIS
+   ============================================================ */
+:root{
+  --porcelana:#F4F1EA;
+  --blanco:#FAF9F6;
+  --crema:#E6DAC8;
+  --arena:#CBB9A4;
+  --roca:#A48D78;
+  --cacao:#43291F;
+  --cacao-suave:#7A6154;
+  --rosa:#E4B9B9;
+
+  --display:"Bodoni Moda", Georgia, serif;
+  --mano:"Sacramento", cursive;
+  --texto:"Jost", system-ui, sans-serif;
+
+  --marco:min(1180px, 91vw);
+  --cuadricula:rgba(203,185,164,.30);
+  --barra:92px;
+
+  /* imagen de fondo del hero — cambia el nombre si usas otro archivo */
+  --fondo:url("Fondos Maddis.jpg");
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--barra) + 12px)}
+body{
+  background:var(--porcelana);
+  color:var(--cacao);
+  font-family:var(--texto);font-weight:300;
+  font-size:16px;line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--roca);outline-offset:4px;border-radius:2px}
+
+/* papel cuadriculado — el fondo del cuaderno */
+.papel{
+  background-image:
+    linear-gradient(var(--cuadricula) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+  background-size:36px 36px;
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(164,141,120,.96);
+  backdrop-filter:blur(8px);
+  transition:transform .35s ease;
+}
+.nav.escondida{transform:translateY(-100%)}
+.nav-int{
+  width:var(--marco);margin-inline:auto;
+  display:flex;align-items:center;justify-content:flex-start;
+  gap:3rem;padding:.1rem 0;
+}
+.nav-links{display:flex;align-items:center;gap:2.1rem;list-style:none}
+.nav-links.der{justify-content:flex-end}
+.nav-marca img{height:88px;width:auto;display:block}
+.nav-links a{
+  text-decoration:none;font-size:.74rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--porcelana);transition:color .25s;
+}
+.nav-links a:hover{color:#fff}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  padding:calc(var(--barra) + clamp(3rem,7vw,5.5rem)) 0 clamp(4rem,8vw,6rem);
+  border-bottom:1px solid var(--crema);
+  background-image:
+    linear-gradient(102deg,
+      var(--porcelana) 0%,
+      rgba(244,241,234,.94) 34%,
+      rgba(244,241,234,.62) 60%,
+      rgba(244,241,234,.20) 100%),
+    var(--fondo);
+  background-size:cover, cover;
+  background-position:center, center 40%;
+  background-repeat:no-repeat, no-repeat;
+}
+.hero-int{
+  width:var(--marco);margin-inline:auto;
+  display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;
+}
+.eyebrow{
+  font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--roca);margin-bottom:1.6rem;
+}
+.hero h1{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(2.8rem,8vw,5.6rem);line-height:.98;letter-spacing:-.02em;
+}
+.hero h1 .mano{
+  font-family:var(--mano);font-size:1.35em;color:var(--roca);
+  display:block;margin-top:.1em;line-height:.9;
+}
+.hero p{margin:1.8rem 0 2.3rem;max-width:38ch;color:var(--cacao-suave)}
+.hero-acciones{display:flex;flex-wrap:wrap;gap:.8rem}
+.hero-panel{display:grid;place-items:center;width:min(560px,46vw)}
+.hero-panel img{width:100%}
+
+.boton{
+  display:inline-block;text-decoration:none;cursor:pointer;
+  font-family:var(--texto);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:.95rem 2.2rem;border-radius:999px;
+  border:1px solid var(--cacao);background:transparent;color:var(--cacao);
+  transition:background .25s,color .25s,border-color .25s,transform .25s;
+}
+.boton:hover{background:var(--cacao);color:var(--porcelana);transform:translateY(-2px)}
+.boton.lleno{background:var(--cacao);color:var(--porcelana)}
+.boton.lleno:hover{background:var(--roca);border-color:var(--roca)}
+
+/* ---------- secciones ---------- */
+.seccion{width:var(--marco);margin-inline:auto;padding:clamp(3.5rem,8vw,6rem) 0}
+.rotulo{
+  font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--roca);margin-bottom:.9rem;
+}
+.titulo{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.9rem,5vw,3.1rem);line-height:1.1;
+}
+.titulo .mano{font-family:var(--mano);font-size:1.3em;color:var(--roca)}
+.bajada{margin-top:.9rem;max-width:46ch;color:var(--cacao-suave)}
+.encabezado{margin-bottom:2.6rem}
+
+/* ---------- filtros ---------- */
+.filtros{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:3rem}
+.filtro{
+  font-family:var(--texto);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  cursor:pointer;padding:.58rem 1.25rem;border-radius:999px;
+  border:1px solid var(--arena);background:transparent;color:var(--cacao-suave);transition:all .25s;
+}
+.filtro:hover{border-color:var(--roca);color:var(--roca)}
+.filtro[aria-pressed="true"]{background:var(--cacao);border-color:var(--cacao);color:var(--porcelana)}
+
+/* ---------- catálogo: polaroids pegadas con cinta ---------- */
+.rejilla{display:grid;gap:3.2rem 1.8rem;grid-template-columns:repeat(auto-fill,minmax(228px,1fr))}
+.pieza{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.pieza.visible{opacity:1;transform:none}
+.pieza.oculta{display:none}
+
+.polaroid{
+  position:relative;background:var(--blanco);
+  padding:12px 12px 0;
+  box-shadow:0 10px 26px rgba(67,41,31,.10);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s;
+}
+.pieza:nth-child(4n+1) .polaroid{transform:rotate(-1.8deg)}
+.pieza:nth-child(4n+2) .polaroid{transform:rotate(1.4deg)}
+.pieza:nth-child(4n+3) .polaroid{transform:rotate(-.8deg)}
+.pieza:nth-child(4n+4) .polaroid{transform:rotate(2deg)}
+.pieza:hover .polaroid{transform:rotate(0) translateY(-6px);box-shadow:0 18px 40px rgba(67,41,31,.16)}
+
+/* la cinta adhesiva */
+.polaroid::before{
+  content:"";position:absolute;top:-11px;left:50%;
+  width:74px;height:24px;transform:translateX(-50%) rotate(-2.5deg);
+  background:rgba(203,185,164,.55);
+  border-left:1px dashed rgba(164,141,120,.5);
+  border-right:1px dashed rgba(164,141,120,.5);
+}
+/* --recorte: cuánto se acerca la foto anclada arriba.
+   1 = sin recorte · 1.12 = corta ~11% de abajo · 1.2 = corta ~17% */
+.foto{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--crema);--recorte:1.14}
+.foto img{
+  position:relative;z-index:1;width:100%;height:100%;object-fit:cover;
+  object-position:top center;
+  transform:scale(var(--recorte));transform-origin:top center;
+}
+.sin-foto{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  background:linear-gradient(var(--ang,150deg),var(--crema),var(--porcelana) 55%,var(--arena));
+}
+.sin-foto span{
+  font-family:var(--texto);font-size:.62rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--roca);
+}
+.pie{
+  font-family:var(--mano);font-size:1.55rem;color:var(--cacao);
+  text-align:center;padding:.35rem 0 .55rem;line-height:1.15;
+}
+.datos{
+  display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;
+  margin-top:1.1rem;padding-inline:2px;
+}
+.talla{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--roca)}
+.precio{font-family:var(--display);font-size:1.05rem}
+.pedir{
+  display:block;margin-top:.55rem;padding-inline:2px;text-decoration:none;
+  font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cacao-suave);
+  transition:color .25s;
+}
+.pedir:hover{color:var(--roca)}
+.pedir::after{content:" →"}
+
+/* ---------- adornos recortados ---------- */
+.deco{
+  position:absolute;pointer-events:none;z-index:0;
+  filter:drop-shadow(0 6px 14px rgba(67,41,31,.14));
+}
+.seccion,.contacto,.bloque{position:relative;overflow:hidden}
+.encabezado,.hero-int,.contacto-int{position:relative;z-index:2}
+
+.d-lirio{top:3.5rem;right:8%;width:clamp(150px,19vw,290px);transform:rotate(9deg);opacity:.95}
+.d-mariposa{bottom:12%;right:6%;width:clamp(70px,8vw,120px);transform:rotate(-14deg)}
+.d-hibisco{bottom:6.5rem;right:0;width:clamp(150px,19vw,290px);transform:rotate(-10deg)}
+.d-estrella{top:9%;right:7%;width:clamp(44px,5vw,74px);transform:rotate(6deg)}
+.d-est2{top:3%;right:26%;width:clamp(24px,2.6vw,38px);transform:rotate(-14deg);opacity:.8}
+.d-est3{top:25%;right:17%;width:clamp(30px,3.2vw,48px);transform:rotate(14deg);opacity:.9}
+.d-est4{top:36%;right:4%;width:clamp(26px,2.8vw,40px);transform:rotate(-8deg);opacity:.75}
+.d-est5{top:16%;right:35%;width:clamp(20px,2.2vw,32px);transform:rotate(20deg);opacity:.7}
+.d-concha{bottom:2rem;right:2%;width:clamp(90px,11vw,160px);transform:rotate(-6deg)}
+.d-mar2{top:16%;right:9%;width:clamp(50px,5.5vw,86px);transform:rotate(18deg)}
+.d-mar3{bottom:22%;left:9%;width:clamp(44px,5vw,74px);transform:rotate(-22deg)}
+.d-mar4{top:48%;right:17%;width:clamp(38px,4vw,62px);transform:rotate(8deg);opacity:.85}
+.d-anturio{top:2rem;left:1.8%;width:clamp(62px,7vw,102px);transform:rotate(12deg)}
+.d-mariposa-chica{top:.4rem;left:0;width:clamp(66px,7.5vw,112px);transform:rotate(10deg)}
+.d-vela{bottom:2.5rem;right:2%;width:clamp(56px,6vw,88px);transform:rotate(-4deg)}
+
+@media (max-width:860px){
+  .d-mariposa,.d-estrella,.d-vela,.d-mariposa-chica,.d-hibisco,
+  .d-mar2,.d-mar3,.d-mar4,.d-est2,.d-est3,.d-est4,.d-est5{display:none}
+  .d-lirio,.d-concha,.d-anturio{width:78px;opacity:.75}
+}
+
+/* ---------- guía de color ---------- */
+.colores{display:flex;flex-wrap:wrap;gap:1.4rem;margin-bottom:3rem}
+.color{
+  display:flex;flex-direction:column;align-items:center;gap:.55rem;
+  background:none;border:0;cursor:pointer;padding:0;width:74px;
+  font-family:var(--texto);font-size:.66rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--cacao-suave);transition:color .25s;
+}
+.color .muestra{
+  width:52px;height:52px;border-radius:50%;
+  box-shadow:0 0 0 1px rgba(67,41,31,.12), 0 4px 12px rgba(67,41,31,.08);
+  transition:transform .3s, box-shadow .3s;
+}
+.color:hover .muestra{transform:translateY(-3px)}
+.color[aria-pressed="true"]{color:var(--cacao)}
+.color[aria-pressed="true"] .muestra{
+  transform:translateY(-3px);
+  box-shadow:0 0 0 2px var(--porcelana), 0 0 0 4px var(--roca);
+}
+
+.paletas{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.paleta{background:var(--blanco);border:1px solid var(--crema);border-radius:14px;padding:1.5rem;
+  opacity:0;animation:aparece .45s ease forwards}
+@keyframes aparece{to{opacity:1}}
+.paleta .barras{display:flex;height:52px;border-radius:8px;overflow:hidden;margin-bottom:1rem}
+.paleta .barras span{flex:1}
+.paleta h3{font-family:var(--display);font-weight:400;font-size:1.15rem;margin-bottom:.35rem}
+.paleta p{font-size:.9rem;color:var(--cacao-suave);line-height:1.55}
+
+.tips{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:3.2rem}
+.tip{border-top:1px solid var(--crema);padding-top:1.3rem}
+.tip h4{font-family:var(--display);font-weight:400;font-size:1.05rem;margin-bottom:.4rem}
+.tip p{font-size:.9rem;color:var(--cacao-suave)}
+
+/* ---------- cómo funciona ---------- */
+.bloque{background:var(--blanco);border-block:1px solid var(--crema)}
+.pasos{
+  display:grid;gap:2rem 1.6rem;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:2.8rem;
+}
+.paso{position:relative;padding-top:1.6rem;border-top:1px solid var(--crema)}
+.paso-num{
+  position:absolute;top:-.85rem;left:0;background:var(--blanco);padding-right:.7rem;
+  font-family:var(--display);font-size:.86rem;letter-spacing:.2em;color:var(--roca);
+}
+.paso h3{font-family:var(--display);font-weight:400;font-size:1.2rem;margin-bottom:.45rem}
+.paso p{color:var(--cacao-suave);font-size:.92rem;line-height:1.6}
+
+/* ---------- notas ---------- */
+.notas{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:3rem}
+.nota{background:var(--porcelana);border:1px solid var(--crema);border-radius:14px;padding:1.8rem}
+.nota.ojo{background:#F6EDEA;border-color:var(--rosa)}
+.nota h3{
+  font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--roca);margin-bottom:.7rem;
+}
+.nota.ojo h3{color:#B87E7E}
+.nota p{font-size:.95rem;color:var(--cacao-suave)}
+.nota strong{font-weight:500;color:var(--cacao)}
+
+/* ---------- contacto ---------- */
+.contacto{text-align:center;padding:clamp(3.5rem,8vw,6rem) 1.5rem;border-top:1px solid var(--crema)}
+.contacto > *{max-width:var(--marco);margin-inline:auto}
+.contacto .retrato{width:clamp(140px,16vw,190px);margin:0 auto 1.8rem}
+/* compensa el espaciado de letras para que el rótulo quede óptico al centro */
+.contacto .rotulo{font-size:.9rem;letter-spacing:.34em;text-indent:.34em}
+.gracias{font-family:var(--mano);font-size:clamp(2rem,5.5vw,3.2rem);color:var(--roca);line-height:1.1}
+.contacto .bajada{margin:1.2rem auto 2rem}
+.enlaces{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
+
+footer{
+  text-align:center;padding:2.2rem 1.5rem;background:var(--roca);color:var(--porcelana);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+
+@media (max-width:860px){
+  :root{--barra:126px}
+  .hero{
+    background-image:
+      linear-gradient(rgba(244,241,234,.88), rgba(244,241,234,.93)),
+      var(--fondo);
+  }
+  .hero-int{grid-template-columns:1fr;gap:2.2rem;text-align:center;justify-items:center}
+  .hero p{margin-inline:auto}
+  .hero-acciones{justify-content:center}
+  .hero-panel{order:-1;width:min(360px,80vw)}
+  .nav-int{flex-direction:column;justify-content:center;gap:.5rem;padding:.6rem 0}
+  .nav-links{justify-content:center;gap:1.3rem;flex-wrap:wrap}
+  .nav-marca img{height:54px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .pieza{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-int">
+    <a href="#top" class="nav-marca"><img src="Logo%20Blanco%20Maddis.png" alt="Maddis"></a>
+    <ul class="nav-links">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#combinar">Combinar</a></li>
+      <li><a href="#funciona">Cómo funciona</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img class="deco d-mariposa" src="mariposa.png" alt="">
+  <div class="hero-int">
+    <div>
+      <p class="eyebrow">Tienda en línea · Guatemala</p>
+      <h1>Tu estilo,<span class="mano">a tu medida.</span></h1>
+      <p>Prendas y accesorios elaborados bajo pedido. Escoges tu favorita, la confirmamos contigo y la preparamos para ti.</p>
+      <div class="hero-acciones">
+        <a href="#catalogo" class="boton lleno">Ver el catálogo</a>
+        <a href="#funciona" class="boton">Cómo hacer tu pedido</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <img src="maddis-texto.png" alt="Maddis">
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="seccion" id="catalogo" style="padding-top:clamp(6rem,11vw,9rem)">
+    <img class="deco d-hibisco" src="hibisco.png" alt="">
+    <img class="deco d-lirio" src="lirio.png" alt="">
+    <img class="deco d-mariposa-chica" src="mariposa-chica.png" alt="">
+    <div class="encabezado">
+      <h2 class="titulo">Escoge tu <span class="mano">favorita</span></h2>
+      <p class="bajada">Cada prenda aparece con la talla disponible. Escríbenos para confirmar disponibilidad, colores y el total de tu pedido.</p>
+    </div>
+
+    <div class="filtros" role="group" aria-label="Filtrar por tipo de prenda">
+      <button class="filtro" data-cat="todo" aria-pressed="true">Todo</button>
+      <button class="filtro" data-cat="blusas" aria-pressed="false">Blusas</button>
+      <button class="filtro" data-cat="tops" aria-pressed="false">Tops</button>
+      <button class="filtro" data-cat="bodies" aria-pressed="false">Bodies y vestidos</button>
+      <button class="filtro" data-cat="accesorios" aria-pressed="false">Accesorios</button>
+    </div>
+
+    <div class="rejilla" id="rejilla"></div>
+  </section>
+
+  <section class="seccion" id="combinar">
+    <img class="deco d-estrella" src="estrella.png" alt="">
+    <img class="deco d-est2" src="estrella.png" alt="">
+    <img class="deco d-est3" src="estrella.png" alt="">
+    <img class="deco d-est4" src="estrella.png" alt="">
+    <img class="deco d-est5" src="estrella.png" alt="">
+    <div class="encabezado">
+      <p class="rotulo">Guía de estilo</p>
+      <h2 class="titulo">Cómo <span class="mano">combinar</span></h2>
+      <p class="bajada">Escoge el color de tu prenda y te mostramos con qué se ve mejor.</p>
+    </div>
+
+    <div class="colores" id="colores" role="group" aria-label="Elige un color base"></div>
+    <div class="paletas" id="paletas" aria-live="polite"></div>
+
+    <div class="tips">
+      <div class="tip">
+        <h4>La regla 60-30-10</h4>
+        <p>Un color manda en el 60% del look, otro acompaña en el 30% y el último aparece solo en el 10%: aretes, cincho, zapatos.</p>
+      </div>
+      <div class="tip">
+        <h4>Un solo protagonista</h4>
+        <p>Si la prenda es estampada, todo lo demás va liso. Escoge un color que ya esté dentro del estampado y no fallas.</p>
+      </div>
+      <div class="tip">
+        <h4>Neutros que salvan</h4>
+        <p>Crema, café, blanco y negro combinan con todo. Cuando dudes, ponlos de base y deja que la prenda hable.</p>
+      </div>
+      <div class="tip">
+        <h4>Accesorios en un tono</h4>
+        <p>Elige dorado o plateado y mantente ahí en toda la vestimenta. Mezclarlos desordena el conjunto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <img class="deco d-anturio" src="anturio.png" alt="">
+    <img class="deco d-vela" src="vela.png" alt="">
+    <div class="seccion" id="funciona">
+      <p class="rotulo">Cómo funciona</p>
+      <h2 class="titulo">De tu pedido a tu <span class="mano">puerta</span></h2>
+      <div class="pasos">
+        <div class="paso"><p class="paso-num">01</p><h3>Elige</h3><p>Explora el catálogo y escoge tus prendas favoritas.</p></div>
+        <div class="paso"><p class="paso-num">02</p><h3>Haz tu pedido</h3><p>Escríbenos por Instagram y cuéntanos qué quieres apartar.</p></div>
+        <div class="paso"><p class="paso-num">03</p><h3>Confirmación</h3><p>Te confirmamos disponibilidad, tallas, colores y el valor total.</p></div>
+        <div class="paso"><p class="paso-num">04</p><h3>Anticipo</h3><p>Trabajamos bajo anticipo; el monto depende del valor de la prenda.</p></div>
+        <div class="paso"><p class="paso-num">05</p><h3>Producción y envío</h3><p>Preparamos tu pedido y lo enviamos hasta tu puerta.</p></div>
+      </div>
+
+      <div class="notas" id="entrega">
+        <div class="nota">
+          <h3>Tiempo de entrega</h3>
+          <p>Tu pedido tarda <strong>de 15 a 19 días hábiles</strong> aproximadamente en llegar. Te mantenemos informada durante todo el proceso.</p>
+        </div>
+        <div class="nota ojo">
+          <h3>Importante</h3>
+          <p>Al ser prendas bajo pedido, <strong>no manejamos cambios ni devoluciones</strong>. Asegúrate de elegir correctamente talla, color y modelo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto papel" id="contacto">
+    <img class="deco d-concha" src="concha.png" alt="">
+    <img class="deco d-mar2" src="mariposa-chica.png" alt="">
+    <img class="deco d-mar3" src="mariposa.png" alt="">
+    <img class="deco d-mar4" src="mariposa-grande.png" alt="">
+    <img class="deco d-mariposa-grande" src="mariposa-grande.png" alt="" style="top:8%;left:5%;width:clamp(60px,7vw,105px);transform:rotate(-12deg)">
+    <img class="retrato" src="maddis-logo.png" alt="Maddis">
+    <p class="rotulo">Escríbenos</p>
+    <p class="gracias">Gracias por apoyar lo hecho con amor</p>
+    <p class="bajada">Cada pedido es especial para ti. Mándanos un mensaje y te pasamos más fotos, medidas y el detalle de la tela.</p>
+    <div class="enlaces">
+      <a href="https://instagram.com/maddis.gt" class="boton lleno" target="_blank" rel="noopener">Instagram @maddis.gt</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Maddis · Tu estilo, nuestro compromiso ·
+  <a href="https://instagram.com/maddis.gt" target="_blank" rel="noopener">@maddis.gt</a> ·
+  <span id="anio"></span>
+</footer>
+
+<script>
+/* ============================================================
+   1. TUS DATOS
+   ============================================================ */
+const INSTAGRAM = "maddis.gt";
+
+/* ============================================================
+   2. TUS PRODUCTOS
+   Para poner la foto de una prenda, escribe el archivo en "foto",
+   por ejemplo:  foto: "fotos/blusa-polka-dot.jpg"
+   cat: blusas | tops | bodies | accesorios
+   ============================================================ */
+const PRODUCTOS = [
+  { nombre:"Blusa Polka Dot",   talla:"M",     precio:125,  cat:"blusas",     foto:"blusa-polka-dot.png" },
+  { nombre:"Top Sunshine",      talla:"S",     precio:125,  cat:"tops",       foto:"top-sunshine.png" },
+  { nombre:"Blusa Flora",       talla:"S",     precio:125,  cat:"blusas",     foto:"blusa-flora.png" },
+  { nombre:"Blusa Tropi",       talla:"L / M", precio:130,  cat:"blusas",     foto:"blusa-tropi.png" },
+  { nombre:"Pañuelo Polka Dot", talla:"Única", precio:null, cat:"accesorios", foto:"Pa%C3%B1uelo%20Polka%20Dot.jpg" },
+  { nombre:"Top Luciana",       talla:"XS",    precio:125,  cat:"tops",       foto:"top-luciana.png" },
+  { nombre:"Vestido Ani",       talla:"S",     precio:175,  cat:"bodies",     foto:"vestido-ani.png" },
+  { nombre:"Blusa Carli",       talla:"M",     precio:155,  cat:"blusas",     foto:"blusa-carli.png" },
+  { nombre:"Top Jade",          talla:"M",     precio:125,  cat:"tops",       foto:"top-jade.png" },
+  { nombre:"Body Lua",          talla:"S",     precio:125,  cat:"bodies",     foto:"body-lua.png" },
+  { nombre:"Body Anita",        talla:"M",     precio:130,  cat:"bodies",     foto:"body-anita.png" }
+];
+
+/* ---------- de aquí para abajo no necesitas tocar nada ---------- */
+const IG = "https://instagram.com/" + INSTAGRAM;
+
+const rejilla = document.getElementById("rejilla");
+
+rejilla.innerHTML = PRODUCTOS.map((p,i)=>{
+  const visual = `
+        <div class="sin-foto" style="--ang:${120 + i*15}deg"><span>Foto pendiente</span></div>
+        <img src="${p.foto}" alt="${p.nombre}" loading="lazy"
+             onerror="this.parentNode.classList.add('sin-imagen');this.remove()">`;
+  const precio = p.precio ? "Q " + p.precio.toFixed(2) : "A consultar";
+  return `
+    <article class="pieza" data-cat="${p.cat}">
+      <div class="polaroid">
+        <div class="foto">${visual}</div>
+        <p class="pie">${p.nombre}</p>
+      </div>
+      <div class="datos">
+        <span class="talla">Talla ${p.talla}</span>
+        <span class="precio">${precio}</span>
+      </div>
+      <a class="pedir" href="${IG}" target="_blank" rel="noopener">Pedir esta prenda</a>
+    </article>`;
+}).join("");
+
+document.getElementById("anio").textContent = new Date().getFullYear();
+
+const piezas = [...document.querySelectorAll(".pieza")];
+
+document.querySelectorAll(".filtro").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".filtro").forEach(b=>b.setAttribute("aria-pressed","false"));
+    btn.setAttribute("aria-pressed","true");
+    const cat = btn.dataset.cat;
+    let n = 0;
+    piezas.forEach(pz=>{
+      const mostrar = cat === "todo" || pz.dataset.cat === cat;
+      pz.classList.toggle("oculta", !mostrar);
+      if(mostrar){ n++; pz.classList.add("visible"); }
+    });
+
+  });
+});
+
+/* ============================================================
+   3. COMBINACIONES DE COLOR — edita, agrega o quita las que quieras
+   ============================================================ */
+const COLORES = [
+  { nombre:"Crema", hex:"#F2EDE3", combos:[
+    { titulo:"Todo claro", colores:["#F7F4EC","#E6DAC8","#CBB9A4"],
+      texto:"Tres cremas distintos en un mismo look. Mezcla texturas (lino, punto, satín) para que no se vea plano." },
+    { titulo:"Con denim", colores:["#F7F4EC","#6B84A6","#C9A227"],
+      texto:"El jean y un accesorio dorado levantan el crema sin recargarlo. Ideal para diario." }
+  ]},
+  { nombre:"Negro", hex:"#2B2B2B", combos:[
+    { titulo:"Clásico", colores:["#2B2B2B","#F7F4EC","#A48D78"],
+      texto:"Negro con crema y un café en el bolso o los zapatos. Nunca falla y se ve caro." },
+    { titulo:"Con un golpe", colores:["#2B2B2B","#B5453F","#E6DAC8"],
+      texto:"Sobre negro, un rojo o vino en labial o accesorio se roba la mirada." }
+  ]},
+  { nombre:"Café", hex:"#A48D78", combos:[
+    { titulo:"Mismo tono", colores:["#6B4E3D","#A48D78","#E6DAC8"],
+      texto:"Del café oscuro al beige claro en un solo conjunto. Elegante y muy fácil de armar." },
+    { titulo:"Café y verde", colores:["#A48D78","#A8BF7E","#F7F4EC"],
+      texto:"El verde salvia refresca el café. Muy bonito de día." }
+  ]},
+  { nombre:"Verde", hex:"#A8BF7E", combos:[
+    { titulo:"Natural", colores:["#A8BF7E","#E6DAC8","#6B4E3D"],
+      texto:"Verde con beige y café: se ve fresco y descansado. Perfecto para prendas florales." },
+    { titulo:"Verde y rosa", colores:["#A8BF7E","#E4B9B9","#F7F4EC"],
+      texto:"Combinación suave y femenina. Deja el rosa para los accesorios." }
+  ]},
+  { nombre:"Rosa", hex:"#E4B9B9", combos:[
+    { titulo:"Suave", colores:["#E4B9B9","#F7F4EC","#CBB9A4"],
+      texto:"Rosa con blanco y arena. Delicado y muy fotogénico." },
+    { titulo:"Rosa y café", colores:["#E4B9B9","#6B4E3D","#C9A227"],
+      texto:"El café oscuro le da carácter al rosa. Con dorado queda de noche." }
+  ]},
+  { nombre:"Azul", hex:"#6B84A6", combos:[
+    { titulo:"De diario", colores:["#6B84A6","#F7F4EC","#A48D78"],
+      texto:"Jean con blanco y café. La fórmula más segura del clóset." },
+    { titulo:"Para salir", colores:["#6B84A6","#2B2B2B","#E6DAC8"],
+      texto:"Azul con negro sí se puede, siempre que un crema los separe." }
+  ]}
+];
+
+const zonaColores = document.getElementById("colores");
+const zonaPaletas = document.getElementById("paletas");
+
+zonaColores.innerHTML = COLORES.map((c,i)=>`
+  <button class="color" data-i="${i}" aria-pressed="${i===0}">
+    <span class="muestra" style="background:${c.hex}"></span>
+    ${c.nombre}
+  </button>`).join("");
+
+function pintarPaletas(i){
+  zonaPaletas.innerHTML = COLORES[i].combos.map(cb=>`
+    <div class="paleta">
+      <div class="barras">${cb.colores.map(h=>`<span style="background:${h}"></span>`).join("")}</div>
+      <h3>${cb.titulo}</h3>
+      <p>${cb.texto}</p>
+    </div>`).join("");
+}
+pintarPaletas(0);
+
+zonaColores.querySelectorAll(".color").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    zonaColores.querySelectorAll(".color").forEach(b=>b.setAttribute("aria-pressed","false"));
+    btn.setAttribute("aria-pressed","true");
+    pintarPaletas(Number(btn.dataset.i));
+  });
+});
+
+// la barra se esconde al bajar y vuelve al subir
+const barra = document.querySelector(".nav");
+let anterior = window.scrollY;
+window.addEventListener("scroll", ()=>{
+  const actual = window.scrollY;
+  if(actual > 140 && actual > anterior + 5){
+    barra.classList.add("escondida");
+  } else if(actual < anterior - 5){
+    barra.classList.remove("escondida");
+  }
+  anterior = actual;
+}, { passive:true });
+
+const obs = new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("visible"); obs.unobserve(e.target); } });
+}, { threshold:.12 });
+piezas.forEach((pz,i)=>{ pz.style.transitionDelay = (i % 4) * 70 + "ms"; obs.observe(pz); });
+</script>
+</body>
+</html>
